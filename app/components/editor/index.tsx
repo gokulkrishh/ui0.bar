@@ -4,7 +4,9 @@ import {
   SandpackCodeEditor,
   SandpackPreview,
 } from '@codesandbox/sandpack-react';
+
 import CopyButton from './copy-button';
+import ResetButton from './reset-button';
 
 type EditorProps = Readonly<{
   styles?: string;
@@ -17,7 +19,6 @@ const SourceCodeSquareIcon = (props: React.SVGProps<SVGSVGElement>) => (
     viewBox="0 0 24 24"
     width={21}
     height={21}
-    color={'#fff'}
     fill={'none'}
     {...props}
   >
@@ -53,15 +54,6 @@ const SourceCodeSquareIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export default function Editor({ styles = '', doc }: EditorProps) {
   return (
     <div className="flex flex-col w-full">
-      <div className="flex justify-between px-4 h-[49px] items-center bg-[#151515] border-[#252525] border-t rounded-t-md text-white">
-        <h3 className="font-medium flex items-center gap-1.5 tracking-tighter text-md">
-          <SourceCodeSquareIcon />
-          <span>Playground</span>
-        </h3>
-        <div className="flex items-center">
-          <CopyButton doc={doc} />
-        </div>
-      </div>
       <SandpackProvider
         options={{
           initMode: 'immediate',
@@ -86,6 +78,16 @@ export default function Editor({ styles = '', doc }: EditorProps) {
         template="react"
         theme={'dark'}
       >
+        <div className="flex justify-between px-4 h-[49px] items-center bg-[#151515] border-[#252525] border-t rounded-t-md text-white">
+          <h3 className="font-medium flex items-center gap-1.5 tracking-tighter text-base">
+            <SourceCodeSquareIcon className="text-neutral-300" />
+            <span className="text-neutral-300">Playground</span>
+          </h3>
+          <div className="flex gap-2 items-center">
+            <ResetButton />
+            <CopyButton doc={doc} />
+          </div>
+        </div>
         <SandpackLayout className="flex p-0 !rounded-t-none">
           <SandpackCodeEditor showTabs showLineNumbers={false} />
           <SandpackPreview

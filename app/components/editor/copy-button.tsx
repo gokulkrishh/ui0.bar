@@ -30,7 +30,7 @@ const Copy01Icon = (props: any) => (
   </motion.svg>
 );
 
-const Tick02Icon = (props: any) => (
+export const Tick02Icon = (props: any) => (
   <motion.svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -53,47 +53,45 @@ export default function CopyButton({ doc }: { doc: string }) {
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
   return (
-    <div className="flex items-center justify-center">
-      <motion.button
-        className="text-zinc-400 group p-1.5 hover:bg-zinc-900 outline-none rounded-lg transition-all border border-zinc-600 hover:border-neutral-300"
-        onClick={async () => {
-          setShouldAnimate(true);
-          await navigator.clipboard.writeText(doc);
-          setTimeout(() => setShouldAnimate(false), 2000);
-        }}
-      >
-        <AnimatePresence>
-          {!shouldAnimate ? (
-            <Copy01Icon
-              transition={{
-                type: 'spring',
-                duration: 0.3,
-                bounce: 0.1,
-              }}
-              initial={false}
-              animate={{
-                scale: [0.5, 1.2, 1],
-                opacity: [0, 1, 1],
-              }}
-              className="group-hover:text-neutral-300"
-            />
-          ) : (
-            <Tick02Icon
-              transition={{
-                type: 'spring',
-                duration: 0.3,
-                bounce: 0.1,
-              }}
-              initial={false}
-              animate={{
-                scale: [0.5, 1.2, 1],
-                opacity: [0, 1, 1],
-              }}
-              className="group-hover:text-neutral-300"
-            />
-          )}
-        </AnimatePresence>
-      </motion.button>
-    </div>
+    <motion.button
+      className="text-zinc-500 flex items-center gap-1.5 text-sm group p-1.5 hover:bg-[#292929] active:bg-[#292929] active:text-zinc-100 outline-none rounded-md transition-all"
+      onClick={async () => {
+        setShouldAnimate(true);
+        await navigator.clipboard.writeText(doc);
+        setTimeout(() => setShouldAnimate(false), 2000);
+      }}
+    >
+      <AnimatePresence>
+        {!shouldAnimate ? (
+          <Copy01Icon
+            transition={{
+              type: 'spring',
+              duration: 0.3,
+              bounce: 0.1,
+            }}
+            initial={false}
+            animate={{
+              scale: [0.5, 1.2, 1],
+              opacity: [0, 1, 1],
+            }}
+            className="text-neutral-300"
+          />
+        ) : (
+          <Tick02Icon
+            transition={{
+              type: 'spring',
+              duration: 0.3,
+              bounce: 0.1,
+            }}
+            initial={false}
+            animate={{
+              scale: [0.5, 1.2, 1],
+              opacity: [0, 1, 1],
+            }}
+            className="text-neutral-300"
+          />
+        )}
+      </AnimatePresence>
+    </motion.button>
   );
 }
