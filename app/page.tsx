@@ -11,7 +11,7 @@ export default function App({ doc }: { doc: string }) {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="flex items-center h-[300px] w-full justify-center">
+    <div className="flex items-center wrapper h-[450px] w-full justify-center">
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         onClick={() => setCount(count + 1)}

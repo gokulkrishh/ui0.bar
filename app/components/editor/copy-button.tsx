@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSandpack } from '@codesandbox/sandpack-react';
 
 const Copy01Icon = (props: any) => (
   <motion.svg
@@ -49,15 +50,18 @@ export const Tick02Icon = (props: any) => (
   </motion.svg>
 );
 
-export default function CopyButton({ doc }: { doc: string }) {
+export default function CopyButton() {
   const [shouldAnimate, setShouldAnimate] = useState(false);
+  const { sandpack } = useSandpack();
 
   return (
     <motion.button
       className="text-zinc-500 flex items-center gap-1.5 text-sm group p-1.5 hover:bg-[#292929] active:bg-[#292929] active:text-zinc-100 outline-none rounded-md transition-all"
       onClick={async () => {
+        const { files, activeFile } = sandpack;
+        const code = files[activeFile].code;
         setShouldAnimate(true);
-        await navigator.clipboard.writeText(doc);
+        await navigator.clipboard.writeText(code);
         setTimeout(() => setShouldAnimate(false), 2000);
       }}
     >
