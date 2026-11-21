@@ -1,7 +1,8 @@
+import type { SVGProps } from 'react';
 import CopyButton from './copy-button';
 import ResetButton from './reset-button';
 
-const SourceCodeSquareIcon = (props: React.SVGProps<SVGSVGElement>) => (
+const SourceCodeSquareIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
